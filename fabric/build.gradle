@@ -76,9 +76,14 @@ sourcesJar {
     from commonSources.archiveFile.map { zipTree(it) }
 }
 
-// Copies the built jar to the folder in the "kabuModsDir" property, IE from ~/.gradle/gradle.properties.
+// Copies the built jar to the folder in "kabuModsDir" from the git ignored local.properties.
 // Only for the MC version that folder is for, so other version builds can't end up in it.
-def modsDirPath = project.findProperty("kabuModsDir")
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withInputStream { localProperties.load(it) }
+}
+def modsDirPath = project.findProperty("kabuModsDir") ?: localProperties.getProperty("kabuModsDir")
 def modsDirMcVersion = project.findProperty("kabuModsDirMcVersion") ?: "1.20.4"
 if (modsDirPath && rootProject.minecraft_version == modsDirMcVersion) {
     def copyToModsDir = tasks.register("copyToModsDir") {
