@@ -11,6 +11,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
+import com.seibel.distanthorizons.core.util.LangUtil;
 import com.seibel.distanthorizons.api.enums.config.DisallowSelectingViaConfigGui;
 import com.seibel.distanthorizons.common.wrappers.gui.*;
 import com.seibel.distanthorizons.common.wrappers.gui.config.ConfigGuiInfo;
@@ -409,13 +410,13 @@ class DhConfigScreen extends DhScreen
 								configGuiInfo.errorMessage = null;
 								break;
 							case NUMBER_TOO_LOW:
-								configGuiInfo.errorMessage = TextOrTranslatable("§cMinimum length is " + numberConfigEntry.getMin());
+								configGuiInfo.errorMessage = TextOrTranslatable(LangUtil.translateOr("distanthorizons.general.validation.tooLow", "§cMinimum length is " + numberConfigEntry.getMin(), numberConfigEntry.getMin()));
 								break;
 							case NUMBER_TOO_HIGH:
-								configGuiInfo.errorMessage = TextOrTranslatable("§cMaximum length is " + numberConfigEntry.getMax());
+								configGuiInfo.errorMessage = TextOrTranslatable(LangUtil.translateOr("distanthorizons.general.validation.tooHigh", "§cMaximum length is " + numberConfigEntry.getMax(), numberConfigEntry.getMax()));
 								break;
 							case INVALID:
-								configGuiInfo.errorMessage = TextOrTranslatable("§cValue is invalid");
+								configGuiInfo.errorMessage = TextOrTranslatable(LangUtil.translateOr("distanthorizons.general.validation.invalid", "§cValue is invalid"));
 								break;
 						}
 					}

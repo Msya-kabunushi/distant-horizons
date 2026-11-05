@@ -1,5 +1,6 @@
 package com.seibel.distanthorizons.common;
 
+import com.seibel.distanthorizons.core.util.LangUtil;
 import com.seibel.distanthorizons.api.enums.config.EDhApiMcRenderingFadeMode;
 import com.seibel.distanthorizons.api.enums.config.EDhApiRenderingEngine;
 import com.seibel.distanthorizons.api.enums.config.quickOptions.EDhApiThreadPreset;
@@ -368,7 +369,7 @@ public abstract class AbstractModInitializer
 				String message =
 					MinecraftTextFormat.ORANGE + "Distant Horizons: Alex's Cave detected." + MinecraftTextFormat.CLEAR_FORMATTING +
 								"You may have to change Alex's config for DH to render. ";
-				ClientApi.INSTANCE.queueSlowChatMessage(message);
+				ClientApi.INSTANCE.queueSlowChatMessage(() -> LangUtil.translateOr("distanthorizons.message.modCompat.alexsCaves", message));
 			}
 			
 			LOGGER.warn(startingString + "[Alex's Caves] may require some config changes in order to render Distant Horizons correctly.");
@@ -398,7 +399,7 @@ public abstract class AbstractModInitializer
 				String message =
 					MinecraftTextFormat.ORANGE + "Distant Horizons: WWOO detected." + MinecraftTextFormat.CLEAR_FORMATTING + "\n" +
 								wwooWarning;
-				ClientApi.INSTANCE.queueSlowChatMessage(message);
+				ClientApi.INSTANCE.queueSlowChatMessage(() -> LangUtil.translateOr("distanthorizons.message.modCompat.wwoo", message));
 			}
 			
 			LOGGER.warn(startingString + "[WWOO] "+ wwooWarning);
@@ -435,7 +436,7 @@ public abstract class AbstractModInitializer
 				String message =
 					MinecraftTextFormat.ORANGE + "Distant Horizons: Chunky detected." + MinecraftTextFormat.CLEAR_FORMATTING + "\n" +
 								chunkyWarning;
-				ClientApi.INSTANCE.queueSlowChatMessage(message);
+				ClientApi.INSTANCE.queueSlowChatMessage(() -> LangUtil.translateOr("distanthorizons.message.modCompat.chunky", message));
 			}
 			
 			LOGGER.warn(startingString + "[Chunky] "+ chunkyWarning);

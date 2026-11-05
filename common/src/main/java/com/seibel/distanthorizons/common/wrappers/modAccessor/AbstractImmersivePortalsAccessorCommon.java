@@ -23,6 +23,7 @@ package com.seibel.distanthorizons.common.wrappers.modAccessor;
 public abstract class AbstractImmersivePortalsAccessorCommon {}
 
 #else
+import com.seibel.distanthorizons.core.util.LangUtil;
 import com.seibel.distanthorizons.common.wrappers.world.ClientLevelWrapper;
 import com.seibel.distanthorizons.core.api.internal.ClientApi;
 import com.seibel.distanthorizons.core.enums.MinecraftTextFormat;
@@ -101,7 +102,7 @@ public abstract class AbstractImmersivePortalsAccessorCommon extends AbstractImm
 					"Distant Horizons' mixin into Immersive Portals\n" +
 					"hasn't run, Disant Horizons rendering may\n" +
 					"fail or look corrupted.\n";
-			ClientApi.INSTANCE.queueSlowChatMessage(message);
+			ClientApi.INSTANCE.queueSlowChatMessage(LangUtil.translateOr("distanthorizons.message.modCompat.immersivePortals", message));
 			
 			LOGGER.warn("Immersive Portals mixin run within the expected time period, rendering may fail or look corrupted.");
 		}

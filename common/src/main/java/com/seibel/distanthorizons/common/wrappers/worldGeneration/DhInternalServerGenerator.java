@@ -1,5 +1,6 @@
 package com.seibel.distanthorizons.common.wrappers.worldGeneration;
 
+import com.seibel.distanthorizons.core.util.LangUtil;
 import com.seibel.distanthorizons.api.DhApi;
 import com.seibel.distanthorizons.common.util.threading.ServerThreadTaskHandler;
 import com.seibel.distanthorizons.common.wrappers.McObjectConverter;
@@ -433,7 +434,7 @@ public class DhInternalServerGenerator
 				String message =
 					MinecraftTextFormat.ORANGE + "Distant Horizons: slow world gen." + MinecraftTextFormat.CLEAR_FORMATTING + "\n" +
 						c2meWarning;
-				ClientApi.INSTANCE.queueSlowChatMessage(message);
+				ClientApi.INSTANCE.queueSlowChatMessage(LangUtil.translateOr("distanthorizons.message.slowWorldGen", message));
 			}
 			
 			LOGGER.warn(c2meWarning);
