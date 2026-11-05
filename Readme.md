@@ -1,3 +1,15 @@
+# このフォークについて
+
+公式 Distant Horizons 3.3.4 を、Fabric 1.20.4 向けに改変したフォークです。Fabric 以外のローダーは削除しています。
+
+- `git clone --recurse-submodules` で取得します。
+- JDK 25 で `gradlew fabric:assemble` を実行します。PowerShell では `.\gradlew.bat "fabric:assemble"` です。
+- `versionProperties` は消せません。ファイルの並びから `MC_VER` の番号を作っています。
+- ビルドした jar を自動でコピーするには、リポジトリ直下の `local.properties` に `kabuModsDir=<mods フォルダ>` を書きます。
+- シェーダーを使うには、Iris のフォーク（1.7.5 以上）が必要です。1.20.4 向けの公式 Iris は 1.7.2 までです。
+
+以下は公式の README です。
+
 # <img src="https://gitlab.com/distant-horizons-team/distant-horizons-core/-/raw/main/_Misc%20Files/logo%20files/new/SVG/Distant-Horizons.svg" height="128px"> 
 _See farther without turning your game into a slide show._
 
