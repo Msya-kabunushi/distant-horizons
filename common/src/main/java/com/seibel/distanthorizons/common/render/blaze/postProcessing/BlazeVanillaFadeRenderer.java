@@ -173,7 +173,7 @@ public class BlazeVanillaFadeRenderer implements IDhVanillaFadeRenderer
 		{
 			// create data //
 			
-			float dhNearClipDistance = RenderUtil.getNearClipPlaneInBlocks();
+			float dhNearClipDistance = RenderUtil.getVanillaFadeNearClipPlaneInBlocks();
 			// this added value prevents the near clip plane and discard circle from touching, which looks bad
 			dhNearClipDistance += 16f;
 			

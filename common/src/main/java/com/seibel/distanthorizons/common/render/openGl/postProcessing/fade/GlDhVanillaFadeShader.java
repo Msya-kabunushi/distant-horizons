@@ -128,7 +128,7 @@ public class GlDhVanillaFadeShader extends GlAbstractShaderRenderer
 		this.shader.setUniform(this.uDhInvMvmProj, this.inverseDhMvmProjMatrix);
 		
 		
-		float dhNearClipDistance = RenderUtil.getNearClipPlaneInBlocks();
+		float dhNearClipDistance = RenderUtil.getVanillaFadeNearClipPlaneInBlocks();
 		// this added value prevents the near clip plane and discard circle from touching, which looks bad
 		dhNearClipDistance += 16f;
 		

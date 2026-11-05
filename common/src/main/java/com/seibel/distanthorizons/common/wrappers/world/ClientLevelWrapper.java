@@ -473,7 +473,17 @@ public class ClientLevelWrapper implements IClientLevelWrapper
 	
 	@Override
 	public String getDhIdentifier() { return this.getHashedSeedEncoded() + "@" + this.getDimensionName(); }
-	
+
+	@Override
+	public boolean isChunkLoaded(int chunkX, int chunkZ)
+	{
+		#if MC_VER <= MC_1_12_2
+		return true;
+		#else
+		return this.level.getChunkSource().hasChunk(chunkX, chunkZ);
+		#endif
+	}
+
 	@Override
 	public EDhApiLevelType getLevelType() { return EDhApiLevelType.CLIENT_LEVEL; }
 	
