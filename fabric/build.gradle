@@ -75,3 +75,26 @@ sourcesJar {
     dependsOn commonSources
     from commonSources.archiveFile.map { zipTree(it) }
 }
+
+// Copies the built jar to the folder in the "kabuModsDir" property, IE from ~/.gradle/gradle.properties.
+// Only for the MC version that folder is for, so other version builds can't end up in it.
+def modsDirPath = project.findProperty("kabuModsDir")
+def modsDirMcVersion = project.findProperty("kabuModsDirMcVersion") ?: "1.20.4"
+if (modsDirPath && rootProject.minecraft_version == modsDirMcVersion) {
+    def copyToModsDir = tasks.register("copyToModsDir") {
+        doLast {
+            def modsDir = file(modsDirPath)
+            def builtJar = file("build/libs/${rootProject.mod_name}-fabric-${rootProject.mod_version}-${rootProject.minecraft_version}.jar")
+            def oldJars = modsDir.listFiles({ File f -> f.name.startsWith("${rootProject.mod_name}-fabric-") && f.name.endsWith(".jar") } as FileFilter) ?: []
+            // two copies of the mod would stop the game from launching, so an old jar has to go first
+            def lockedJars = oldJars.findAll { !it.delete() }
+            if (lockedJars) {
+                logger.warn("Not copied to [${modsDir}], can't replace ${lockedJars*.name}. Is the game running?")
+                return
+            }
+            java.nio.file.Files.copy(builtJar.toPath(), new File(modsDir, builtJar.name).toPath())
+            logger.lifecycle("Copied ${builtJar.name} to [${modsDir}]")
+        }
+    }
+    tasks.named("assemble") { finalizedBy(copyToModsDir) }
+}
