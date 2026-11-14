@@ -153,6 +153,13 @@ public class ClientBlockStateColorCache
 	#endif
 	private final BlockStateWrapper blockStateWrapper;
 	
+	/**
+	 * 色を計算できずに真っピンク（HOT_PINK）にしたことがあるか（kabu.17〜）。
+	 * リソースパックの読み込み直しの最中に計算すると、テクスチャが解放されていてこうなる。
+	 * 読み込み直しが終わったとき、これが立っているときだけ LOD を作り直す（MixinMinecraftResourceReload）
+	 */
+	public static volatile boolean hotPinkSinceReload = false;
+
 	private boolean isColorResolved = false;
 	private int baseColor = 0;
 	private boolean needPostTinting = false;
@@ -489,6 +496,7 @@ public class ClientBlockStateColorCache
 			{
 				LOGGER.warn("Failed to get particle icon color for block ["+this.blockStateWrapper.getSerialString()+"], error: ["+getParticleIconError.getMessage()+"], block will render as hot pink.", getParticleIconError);
 				this.baseColor = ColorUtil.HOT_PINK;
+				hotPinkSinceReload = true;
 			}
 		}
 		finally
